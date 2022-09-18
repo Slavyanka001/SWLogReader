@@ -3,8 +3,6 @@
 #include <string>
 #include <optional>
 
-const int c_required_arg_count = 7;
-
 class Args {
     public:
         bool Initialize( 

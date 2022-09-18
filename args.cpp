@@ -2,23 +2,31 @@
 
 #include <iostream>
 
+
+namespace args {
+    const std::string kPath = "--path";
+    const std::string kConcurrency = "--concurrency";
+    const std::string kFileCount = "--file_count";
+}
+
 bool Args::Initialize( 
     const int arg_count,
     char **args) {
 
-    if (arg_count != c_required_arg_count) {
-        std::cout << "Args count must be equal " << c_required_arg_count << std::endl;
+    static const int kRequiredArgCount = 7;
+    if (arg_count < kRequiredArgCount) {
+        std::cout << "Args count must be more then " << kRequiredArgCount << std::endl;
         return false;
     }
 
     for (auto i = 1; i<arg_count-1; i+=2) {
-        if (std::string(args[i]) == "--path") {
+        if (std::string(args[i]) == args::kPath) {
             path_to_dir = args[i+1];
         }
-        else if (std::string(args[i]) == "--concurrency") {
+        else if (std::string(args[i]) == args::kConcurrency) {
             concurrency = std::atoi(args[i+1]);
         }
-        else if (std::string(args[i]) == "--file_count") {
+        else if (std::string(args[i]) == args::kFileCount) {
             file_count = std::atoi(args[i+1]);
         }
     }
